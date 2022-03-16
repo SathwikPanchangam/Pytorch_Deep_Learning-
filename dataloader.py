@@ -1,9 +1,6 @@
 # import the modules
 import os
 import glob
-from turtle import pd
-from matplotlib import image
-from numpy import imag
 from setuptools.namespaces import flatten
 import random
 from itertools import islice
@@ -20,16 +17,14 @@ class ImageDataLoader(VisionDataset):
     '''
     This class returns the images and labels for the image dataset.
     '''
-    def __init__(self, root: str, train = False, test=False,valid=False,transform =None):
-        super().__init__()
-        
+    def __init__(self, root = None, train = False, test=False,valid=False,transform =None):
+
         self.root = root
         self.train_size = 0.7
         self.test_size = 0.2
-        self.valid = 0.1
+        self.valid_size = 0.1
         self.transform = transform
         self.imagepaths = []
-
 
         # Creating a dictionary for the classes and their labels.
         classes  = []
@@ -44,11 +39,9 @@ class ImageDataLoader(VisionDataset):
         # train set paths
         if train == True:
             self.imagepaths = self.get_data_paths(self.root)[0]
-
         # test set paths
         if test == True:
             self.imagepaths = self.get_data_paths(self.root)[1]
-
         # Validation set paths
         if valid == True:
             self.imagepaths = self.get_data_paths(self.root)[2]
