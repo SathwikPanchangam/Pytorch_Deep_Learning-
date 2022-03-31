@@ -29,7 +29,7 @@ class Metrics():
         tick_marks = np.arange(len(self.classes))
         plt.xticks(tick_marks, self.classes, rotation=0)
         plt.yticks(tick_marks, self.classes)
-        plt.savefig('confusion_matrix1.png')
+        plt.savefig('results/confusion_matrix1.png')
         return fig
 
     def plot_confusion_matrix2(self):
@@ -38,7 +38,7 @@ class Metrics():
         df_cm = pd.DataFrame(cf_matrix/np.sum(cf_matrix) *10, index = [i for i in self.classes], columns = [i for i in self.classes])
         plt.figure(figsize = (12,7))
         sn.heatmap(df_cm, annot=True)
-        plt.savefig('confusion_matrix2.png')
+        plt.savefig('results/confusion_matrix2.png')
         return fig
 
     def get_classification_report(self):

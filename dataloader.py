@@ -35,7 +35,7 @@ class ImageDataLoader(VisionDataset):
         class_to_idx = {value:key for key, value in idx_to_class.items()}
 
         self.class_to_idx = class_to_idx
-        
+
         # train set paths
         if train == True:
             self.imagepaths = self.get_data_paths(self.root)[0]
@@ -45,6 +45,19 @@ class ImageDataLoader(VisionDataset):
         # Validation set paths
         if valid == True:
             self.imagepaths = self.get_data_paths(self.root)[2]
+
+    def get_classes(self):
+
+        # Creating a dictionary for the classes and their labels.
+        classes  = []
+        for path in glob.glob(self.root + '/*'):
+            classes.append(path.split('/')[-1])
+        
+        idx_to_class = {i:val for i,val in enumerate(classes)}
+        class_to_idx = {value:key for key, value in idx_to_class.items()}
+
+        self.class_to_idx = class_to_idx
+        return classes
 
     def get_data_paths(self,root):
         '''
@@ -90,7 +103,6 @@ class ImageDataLoader(VisionDataset):
         # Applying transform to the image
         if self.transform:
             image = self.transform(image)
-
         return image, label
 
 
